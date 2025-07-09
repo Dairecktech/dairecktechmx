@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAIRECKTECH - Corte Láser CNC de Precisión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: none;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+ 
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 100, 255, 0.7);
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(0, 150, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
+        }
+        
+      
+        header {
+            background: linear-gradient(135deg, #1d77ff, #170074);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 80px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo img {
+            height: 100%;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Secciones */
+        section {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg,  #1d77ff, #170074);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 1s ease;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #170074;
+        }
+        
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+        
+        /* Bienvenida */
+        #bienvenida {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 68, 204, 0.05));
+        }
+        
+        .hero {
+            max-width: 900px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0066ff, #170074);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #170074;
+            color: #0066ff;
+        }
+        
+        /* Acerca de */
+        #acerca {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+         
+        #servicios {
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 68, 204, 0.1));
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.1);
+        }
+        
+        .service-card h3 {
+            color: #0066ff;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-card ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card li {
+            margin-bottom: 0.5rem;
+        }
+        
+       
+        #contacto {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            color: #0066ff;
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        .map-container {
+            height: 300px;
+            margin-top: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #0066ff;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0066ff, #170074);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .about-content, .contact-container {
+                flex-direction: column;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 6rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+ 
+    <header>
+        <nav>
+            <a href="#bienvenida" class="logo">
+                <img src="tch.png" alt="DAIRECKTECH Logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#bienvenida">Inicio</a></li>
+                <li><a href="#acerca">Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+ 
+    <section id="bienvenida" class="active">
+        <div class="hero">
+            <h1 class="fade-in">Precisión Industrial en Corte Láser CNC</h1>
+            <p class="fade-in delay-1">Transformamos tus diseños en piezas de alta calidad con tecnología de vanguardia y atención personalizada.</p>
+            <div class="fade-in delay-2">
+                <a href="#servicios" class="btn">Nuestros Servicios</a>
+                <a href="#contacto" class="btn btn-outline">Contactar</a>
+            </div>
+        </div>
+    </section>
+     
+    <section id="acerca">
+        <h2 class="fade-in">Acerca de Nosotros</h2>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <p>En DAIRECKTECH nos especializamos en servicios de corte láser CNC de alta precisión para aplicaciones industriales y comerciales.</p>
+                <p>Con años de experiencia en el sector metalmecánico, nuestro equipo de profesionales está comprometido con la excelencia en cada proyecto que emprendemos.</p>
+                <p>Nuestra misión es proporcionar soluciones de fabricación personalizadas que cumplan con los más altos estándares de calidad y precisión.</p>
+                <p>Contamos con tecnología de punta y personal calificado para garantizar resultados excepcionales en cada pieza que producimos.</p>
+            </div>
+            <div class="about-image fade-in delay-1">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Equipo de corte láser CNC">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Servicios -->
+    <section id="servicios">
+        <h2 class="fade-in">Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <h3>🔧 Corte de Precisión</h3>
+                <p>Corte láser CNC de alta capacidad para piezas metálicas con tolerancias ajustadas a especificaciones técnicas.</p>
+                <ul>
+                    <li>Corte hasta 1/2" de espesor</li>
+                    <li>Alta fidelidad geométrica</li>
+                    <li>Optimización de material</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in delay-1">
+                <h3>📌 Aplicaciones</h3>
+                <p>Soluciones especializadas para diversas industrias y necesidades:</p>
+                <ul>
+                    <li>Celosías arquitectónicas</li>
+                    <li>Componentes para maquinaria</li>
+                    <li>Estructuras metálicas</li>
+                    <li>Rejillas y parrillas</li>
+                    <li>Diseño estructural</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in delay-2">
+                <h3>🧱 Materiales</h3>
+                <p>Trabajamos con diversos materiales metálicos para satisfacer tus requerimientos:</p>
+                <ul>
+                    <li>Acero al carbón</li>
+                    <li>Acero inoxidable</li>
+                    <li>Aluminio</li>
+                    <li>Lámina galvanizada</li>
+                    <li>Latón</li>
+                </ul>
+            </div>
+            
+            <div class="service-card fade-in delay-1">
+                <h3>📐 Sectores</h3>
+                <p>Servicios especializados para diferentes sectores industriales:</p>
+                <ul>
+                    <li>Ingeniería mecánica</li>
+                    <li>Diseño industrial</li>
+                    <li>Arquitectura y construcción</li>
+                    <li>Proyectos metalmecánicos</li>
+                    <li>Prototipos y producción</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section id="contacto">
+        <h2 class="fade-in">Ubicación y Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-info fade-in">
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Hermenegildo Galeana Sur 215B, Centro de Guadalupe, 67100 Guadalupe, N.L.</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+52 813239 1715</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>dairecktech2025@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="map-container fade-in delay-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3594.044399735854!2d-100.25714892426413!3d25.7339156773991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86629452551ea79f%3A0x66e03550ec5730cb!2sHermenegildo%20Galeana%20215B%2C%20Centro%2C%2067100%20Guadalupe%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1620000000000!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <div class="contact-form fade-in delay-2">
+                <form id="formulario-contacto">
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="tel" placeholder="Teléfono (opcional)">
+                    <textarea placeholder="Describe tu proyecto o solicitud..." required></textarea>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="fade-in">
+        <div class="logo">DAIRECKTECH</div>
+        <p>Corte Láser CNC de Precisión Industrial</p>
+        <div class="social-links">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Instagram">📷</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="WhatsApp">💬</a>
+        </div>
+        <p>&copy; 2023 DAIRECKTECH. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // Cursor personalizado
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(0.7)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.3)';
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+        
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorFollower.style.width = '30px';
+                cursorFollower.style.height = '30px';
+                cursorFollower.style.borderColor = 'rgba(0, 200, 255, 0.7)';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                cursorFollower.style.width = '40px';
+                cursorFollower.style.height = '40px';
+                cursorFollower.style.borderColor = 'rgba(0, 150, 255, 0.5)';
+            });
+        });
+        
+        // Animación de scroll para las secciones
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Smooth scrolling para los enlaces
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Formulario de contacto
+        const form = document.getElementById('formulario-contacto');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+            form.reset();
+        });
+    </script>
+</body>
+</html>
