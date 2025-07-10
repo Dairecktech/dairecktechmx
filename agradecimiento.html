@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por contactarnos | DAIRECKTECH</title>
+    <style>
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f9ff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-size: 18px; 
+        }
+        
+        .thank-you-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 3rem; 
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #0066ff, #0044cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        
+        p {
+            font-size: 1.3rem; 
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0066ff, #0044cc);
+            color: white;
+            padding: 1rem 2.5rem; 
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+            font-size: 1.2rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+        
+      
+        footer {
+            background: linear-gradient(135deg, #0066ff, #0044cc);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem; 
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 2rem; 
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-3px);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px; 
+            }
+            
+            h1 {
+                font-size: 2.2rem; 
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1.1rem;
+            }
+            
+            .social-links a {
+                font-size: 1.8rem; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <h1>¡Gracias por tu mensaje!</h1>
+        <p>Hemos recibido tu solicitud correctamente. Nuestro equipo se pondrá en contacto contigo en un plazo máximo de 24 horas hábiles.</p>
+        <p>Mientras tanto, puedes explorar más sobre nuestros servicios o seguirnos en nuestras redes sociales.</p>
+        <a href="index.html" class="btn">Volver al Inicio</a>
+    </div>
+    
+    <!-- Footer idéntico al sitio principal -->
+    <footer>
+        <div class="logo">DAIRECKTECH</div>
+        <p>Corte Láser CNC de Precisión Industrial</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dairecktechmx/" target="_blank" aria-label="Instagram">📷</a>
+            <a href="https://www.facebook.com/profile.php?id=61570096811176" target="_blank" aria-label="Facebook">📘</a>
+            <a href="https://wa.me/528132391715" target="_blank" aria-label="WhatsApp">💬</a>
+            <a href="https://www.tiktok.com/@dairecktech?lang=es-419" target="_blank" aria-label="TikTok">🎵</a>
+            <a href="https://www.linkedin.com/in/dairecktech/" target="_blank" aria-label="LinkedIn">💼</a>
+        </div>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> DAIRECKTECH. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
