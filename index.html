@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
         
- 
         .custom-cursor {
             position: fixed;
             width: 20px;
@@ -45,16 +44,16 @@
             transition: all 0.3s ease, width 0.2s ease, height 0.2s ease;
         }
         
-      
         header {
-            background: linear-gradient(135deg, #1d77ff, #170074);
+            background: linear-gradient(135deg, #1a1a1a, #333333);
             color: white;
             padding: 1rem 2rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         nav {
@@ -101,7 +100,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: white;
+            background-color: #0066ff;
             transition: width 0.3s ease;
         }
         
@@ -116,6 +115,40 @@
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s ease, transform 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        #bienvenida::before {
+    background-image: url('bkh.jpg');
+    background-size: cover;       
+    background-position: center;  
+    opacity: 0.7;                 
+}
+        
+        #acerca::before {
+            background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        #servicios::before {
+            background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        #contacto::before {
+            background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
         }
         
         section.active {
@@ -123,20 +156,38 @@
             transform: translateY(0);
         }
         
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        
         h1 {
             font-size: 3rem;
             margin-bottom: 2rem;
-            background: linear-gradient(135deg,  #1d77ff, #170074);
+            background: linear-gradient(135deg, #0066ff, #170074);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             animation: fadeIn 1s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #170074;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff, #170074);
+            border-radius: 2px;
         }
         
         p {
@@ -153,16 +204,34 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.1), rgba(0, 68, 204, 0.05));
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            color: white;
+        }
+        
+        #bienvenida::before {
+            opacity: 0.7;
+        }
+        
+        #bienvenida h1 {
+            background: linear-gradient(135deg, #ffffff, #cccccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .hero {
             max-width: 900px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .hero p {
             font-size: 1.2rem;
             margin: 0 auto 2rem;
+            color: #fff;
         }
         
         .btn {
@@ -178,22 +247,31 @@
             box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
             border: none;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
         
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(135deg, #170074, #0066ff);
         }
         
         .btn-outline {
             background: transparent;
-            border: 2px solid #170074;
+            border: 2px solid #0066ff;
             color: #0066ff;
+        }
+        
+        .btn-outline:hover {
+            background: #0066ff;
+            color: white;
         }
         
         /* Acerca de */
         #acerca {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         .about-content {
@@ -212,8 +290,9 @@
             flex: 1;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.5s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .about-image:hover {
@@ -227,7 +306,7 @@
         }
          
         #servicios {
-            background: linear-gradient(135deg, rgba(0, 102, 255, 0.05), rgba(0, 68, 204, 0.1));
+            background: rgba(245, 249, 255, 0.9);
         }
         
         .services-grid {
@@ -241,14 +320,36 @@
         .service-card {
             background-color: white;
             border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 102, 255, 0.2);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
         }
         
         .service-card h3 {
@@ -264,11 +365,152 @@
         
         .service-card li {
             margin-bottom: 0.5rem;
+            font-size: 0.95rem;
         }
         
-       
+        /* Carrusel automático */
+        .auto-carousel-container {
+            padding: 4rem 2rem;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+        
+        .auto-carousel-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+        }
+        
+        .auto-carousel-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff, #170074);
+            border-radius: 2px;
+        }
+        
+        .auto-carousel {
+            display: flex;
+            overflow: hidden;
+            height: 400px;
+            position: relative;
+            margin: 0 auto;
+            max-width: 1200px;
+            align-items: center;
+        }
+        
+        .auto-carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .auto-carousel-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auto-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .auto-carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auto-carousel-indicator.active {
+            background-color: #0066ff;
+            transform: scale(1.2);
+        }
+        
+        /* Coverflow */
+        .coverflow-container {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f5f9ff, #e6f0ff);
+            text-align: center;
+        }
+        
+        .coverflow-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+            position: relative;
+        }
+        
+        .coverflow-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff, #170074);
+            border-radius: 2px;
+        }
+        
+        .coverflow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            perspective: 1000px;
+            margin: 0 auto;
+            max-width: 1200px;
+            position: relative;
+        }
+        
+        .coverflow-item {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        
+        .coverflow-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+        
+        .coverflow-item:hover img {
+            filter: grayscale(0%);
+        }
+        
+        /* Contacto */
         #contacto {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.9);
         }
         
         .contact-container {
@@ -284,12 +526,22 @@
         
         .contact-form {
             flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .info-item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
         
         .info-icon {
@@ -305,6 +557,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .map-container iframe {
@@ -340,10 +593,11 @@
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, #0066ff, #170074);
+            background: linear-gradient(135deg, #1a1a1a, #333333);
             color: white;
             text-align: center;
             padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .social-links {
@@ -357,11 +611,19 @@
             color: white;
             font-size: 1.5rem;
             transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
         }
         
         .social-links a:hover {
             transform: translateY(-3px);
-            color: rgba(255, 255, 255, 0.8);
+            background: #0066ff;
+            color: white;
         }
         
         /* Animaciones */
@@ -400,14 +662,30 @@
                 font-size: 2.2rem;
             }
             
+            h2 {
+                font-size: 1.8rem;
+            }
+            
             section {
                 padding: 6rem 1.5rem 3rem;
+            }
+            
+            .auto-carousel {
+                height: 300px;
+            }
+            
+            .coverflow {
+                height: 150px;
+            }
+            
+            .coverflow-item {
+                width: 120px;
+                height: 80px;
             }
         }
     </style>
 </head>
 <body>
- 
     <div class="custom-cursor"></div>
     <div class="cursor-follower"></div>
  
@@ -424,19 +702,26 @@
             </ul>
         </nav>
     </header>
-    
- 
-    <section id="bienvenida" class="active">
-        <div class="hero">
-            <h1 class="fade-in">Precisión Industrial en Corte Láser CNC</h1>
-            <p class="fade-in delay-1">Transformamos tus diseños en piezas de alta calidad con tecnología de vanguardia y atención personalizada.</p>
-            <div class="fade-in delay-2">
-                <a href="#servicios" class="btn">Nuestros Servicios</a>
-                <a href="#contacto" class="btn btn-outline">Contactar</a>
-            </div>
+<section id="bienvenida" class="active">
+    <div class="hero">
+        <h1 class="fade-in">PRECISIÓN INDUSTRIAL EN CORTE LÁSER CNC</h1>
+        <p class="fade-in delay-1">TRANSFORMAMOS TUS DISEÑOS EN PIEZAS DE ALTA CALIDAD CON TECNOLOGÍA DE VANGUARDIA Y ATENCIÓN PERSONALIZADA.</p>
+        <div class="fade-in delay-2">
+            <a href="#servicios" class="btn">NUESTROS SERVICIOS</a>
+            <a href="#contacto" class="btn btn-outline">CONTACTAR</a>
         </div>
-    </section>
-     
+    </div>
+</section>
+
+    
+    <div class="auto-carousel-container">
+        <h2 class="auto-carousel-title">NUESTROS TRABAJOS</h2>
+        <div class="auto-carousel" id="auto-carousel">
+        </div>
+        <div class="auto-carousel-indicators" id="auto-carousel-indicators">
+        </div>
+    </div>
+    
     <section id="acerca">
         <h2 class="fade-in">Acerca de Nosotros</h2>
         <div class="about-content">
@@ -452,87 +737,124 @@
         </div>
     </section>
     
-    <!-- Sección de Servicios -->
     <section id="servicios">
         <h2 class="fade-in">Nuestros Servicios</h2>
         <div class="services-grid">
+            <!-- Service Card 1 - Corte de Precisión -->
             <div class="service-card fade-in">
-                <h3>🔧 Corte de Precisión</h3>
-                <p>Corte láser CNC de alta capacidad para piezas metálicas con tolerancias ajustadas a especificaciones técnicas.</p>
-                <ul>
-                    <li>Corte hasta 1/2" de espesor</li>
-                    <li>Alta fidelidad geométrica</li>
-                    <li>Optimización de material</li>
-                </ul>
+                <div class="service-image">
+                    <img src="foto1.png" alt="Corte de Precisión">
+                </div>
+                <div class="service-content">
+                    <h3>🔧 Corte de Precisión</h3>
+                    <p>Corte láser CNC de alta capacidad para piezas metálicas con tolerancias ajustadas a especificaciones técnicas.</p>
+                    <ul>
+                        <li>Corte hasta 1/2" de espesor</li>
+                        <li>Alta fidelidad geométrica</li>
+                        <li>Optimización de material</li>
+                    </ul>
+                </div>
             </div>
             
+            <!-- Service Card 2 - Aplicaciones -->
             <div class="service-card fade-in delay-1">
-                <h3>📌 Aplicaciones</h3>
-                <p>Soluciones especializadas para diversas industrias y necesidades:</p>
-                <ul>
-                    <li>Celosías arquitectónicas</li>
-                    <li>Componentes para maquinaria</li>
-                    <li>Estructuras metálicas</li>
-                    <li>Rejillas y parrillas</li>
-                    <li>Diseño estructural</li>
-                </ul>
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Aplicaciones industriales">
+                </div>
+                <div class="service-content">
+                    <h3>📌 Aplicaciones</h3>
+                    <p>Soluciones especializadas para diversas industrias y necesidades:</p>
+                    <ul>
+                        <li>Celosías arquitectónicas</li>
+                        <li>Componentes para maquinaria</li>
+                        <li>Estructuras metálicas</li>
+                        <li>Rejillas y parrillas</li>
+                        <li>Diseño estructural</li>
+                    </ul>
+                </div>
             </div>
             
+            <!-- Service Card 3 - Materiales -->
             <div class="service-card fade-in delay-2">
-                <h3>🧱 Materiales</h3>
-                <p>Trabajamos con diversos materiales metálicos para satisfacer tus requerimientos:</p>
-                <ul>
-                    <li>Acero al carbón, inoxidable y galvanizado</li>
-                    <li>Bronce</li>
-                    <li>Aluminio</li>
-                    <li>Cobre</li>
-                    <li>Latón</li>
-                    <li>Oro</li>
-                </ul>
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Materiales metálicos">
+                </div>
+                <div class="service-content">
+                    <h3>🧱 Materiales</h3>
+                    <p>Trabajamos con diversos materiales metálicos para satisfacer tus requerimientos:</p>
+                    <ul>
+                        <li>Acero al carbón, inoxidable y galvanizado</li>
+                        <li>Bronce</li>
+                        <li>Aluminio</li>
+                        <li>Cobre</li>
+                        <li>Latón</li>
+                        <li>Oro</li>
+                    </ul>
+                </div>
             </div>
             
+            <!-- Service Card 4 - Sectores -->
             <div class="service-card fade-in delay-1">
-                <h3>📐 Sectores</h3>
-                <p>Servicios especializados para diferentes sectores industriales:</p>
-                <ul>
-                    <li>Ingeniería mecánica</li>
-                    <li>Diseño industrial</li>
-                    <li>Arquitectura y construcción</li>
-                    <li>Proyectos metalmecánicos</li>
-                    <li>Prototipos y producción</li>
-                </ul>
+                <div class="service-image">
+                    <img src="foto2.png" alt="Sectores industriales">
+                </div>
+                <div class="service-content">
+                    <h3>📐 Sectores</h3>
+                    <p>Servicios especializados para diferentes sectores industriales:</p>
+                    <ul>
+                        <li>Ingeniería mecánica</li>
+                        <li>Diseño industrial</li>
+                        <li>Arquitectura y construcción</li>
+                        <li>Proyectos metalmecánicos</li>
+                        <li>Prototipos y producción</li>
+                    </ul>
+                </div>
             </div>
 
-                        <div class="service-card fade-in delay-2">
-                <h3>🛠️ Cortes Adicionales</h3>
-                <p>Trabajamos con diversos materiales metálicos para satisfacer tus requerimientos:</p>
-                <ul>
-                    <li>Plástico en general</li>
-                    <li>Madera</li>
-                    <li>Cartón</li>
-                    <li>Corte MDF</li>
-                    <li>Nylamid</li>
-                </ul>
+            <!-- Service Card 5 - Cortes Adicionales -->
+            <div class="service-card fade-in delay-2">
+                <div class="service-image">
+                    <img src="foto3.png" alt="Cortes adicionales">
+                </div>
+                <div class="service-content">
+                    <h3>🛠️ Cortes Adicionales</h3>
+                    <p>Trabajamos con diversos materiales no metálicos para satisfacer tus requerimientos:</p>
+                    <ul>
+                        <li>Plástico en general</li>
+                        <li>Madera</li>
+                        <li>Cartón</li>
+                        <li>Corte MDF</li>
+                        <li>Nylamid</li>
+                    </ul>
+                </div>
             </div>
 
+            <!-- Service Card 6 - Escáner Láser 3D -->
             <div class="service-card fade-in delay-1">
-                <h3>🔍 Escáner Láser 3D y Modelado de Malla – Entorno BIM</h3>
-                <p>Escaneado láser portátil de alta precisión con tecnología SIMSCAN, ideal para capturar geometrías complejas, estructuras y herramientas. El sistema genera mallas 3D optimizadas para entornos BIM y procesos técnicos:</p>
-                <ul>
-                    <li>Estructuras con alta resolución</li>
-                    <li>Proyectos de arquitectura e ingeniería con documentación precisa</li>
-                    <li>Modelado digital de superficies y estructuras irregulares</li>
-                    <li>Inspección técnica y control dimensional</li>
-                    <li>Obtención de modelos 3D listos para CAD o simulación</li>
-                    <li>Compatible con flujos de trabajo BIM y visualización interactiva</li>
-                </ul>
+                <div class="service-image">
+                    <img src="foto4.png" alt="Escáner Láser 3D">
+                </div>
+                <div class="service-content">
+                    <h3>🔍 Escáner Láser 3D y Modelado de Malla – Entorno BIM</h3>
+                    <p>Escaneado láser portátil de alta precisión con tecnología SIMSCAN, ideal para capturar geometrías complejas, estructuras y herramientas.</p>
+                    <ul>
+                        <li>Estructuras con alta resolución</li>
+                        <li>Proyectos de arquitectura e ingeniería</li>
+                        <li>Modelado digital de superficies</li>
+                        <li>Inspección técnica y control dimensional</li>
+                        <li>Obtención de modelos 3D listos para CAD</li>
+                        <li>Compatible con flujos de trabajo BIM</li>
+                    </ul>
+                </div>
             </div>
-
-        
         </div>
     </section>
     
-    <!-- Sección de Contacto -->
+    <div class="coverflow-container">
+        <h2 class="coverflow-title">Nuestros Clientes</h2>
+        <div class="coverflow" id="coverflow-slider"></div>
+    </div>
+
     <section id="contacto">
         <h2 class="fade-in">Ubicación y Contacto</h2>
         <div class="contact-container">
@@ -561,70 +883,69 @@
                     </div>
                 </div>
                 
-             <!-- <div class="map-container fade-in delay-1">
-              <iframe src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2smx!4v1752163781261!5m2!1ses-419!2smx!6m8!1m7!1sVijEJzHhog_P2lO3rpMeeA!2m2!1d25.67034698436604!2d-100.260036754565!3f132.02034882084223!4f-14.330010745896118!5f0.4000000000000002" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
-              </div>
-            </div>-->
+                <!-- <div class="map-container fade-in delay-1">
+                    <iframe src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2smx!4v1752163781261!5m2!1ses-419!2smx!6m8!1m7!1sVijEJzHhog_P2lO3rpMeeA!2m2!1d25.67034698436604!2d-100.260036754565!3f132.02034882084223!4f-14.330010745896118!5f0.4000000000000002" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                </div>
+            </div> -->
             
-           <div class="contact-form fade-in delay-2">
-    <form id="formulario-contacto" action="https://formsubmit.co/dairecktech2025@gmail.com" method="POST">
-    
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://dairecktech.github.io/dairecktechmx/agradecimiento.html">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_subject" value="Nuevo mensaje desde el sitio web">
-        <input type="hidden" name="_autoresponse" value="Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.">
-        <input type="text" name="_honey" style="display:none">
-        
-
-        <input type="text" name="nombre" placeholder="Nombre completo" required>
-        <input type="email" name="email" placeholder="Correo electrónico" required>
-        <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
-        <textarea name="mensaje" placeholder="Describe tu proyecto o solicitud..." required></textarea>
-        <button type="submit" class="btn">Enviar Mensaje</button>
-    </form>
-</div>
+            <div class="contact-form fade-in delay-2">
+                <form id="formulario-contacto" action="https://formsubmit.co/dairecktech2025@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://dairecktech.github.io/dairecktechmx/agradecimiento.html">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="Nuevo mensaje desde el sitio web">
+                    <input type="hidden" name="_autoresponse" value="Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.">
+                    <input type="text" name="_honey" style="display:none">
+                    
+                    <input type="text" name="nombre" placeholder="Nombre completo" required>
+                    <input type="email" name="email" placeholder="Correo electrónico" required>
+                    <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
+                    <textarea name="mensaje" placeholder="Describe tu proyecto o solicitud..." required></textarea>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
         </div>
     </section>
 
-<footer class="fade-in">
-    <div class="logo">DAIRECKTECH</div>
-    <p>Corte Láser CNC de Precisión Industrial</p>
-    <div class="social-links">
-        <a href="https://www.instagram.com/dairecktechmx/" target="_blank" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61570096811176" target="_blank" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-            </svg>
-        </a>
-        <a href="https://wa.me/528132391715" target="_blank" aria-label="WhatsApp">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M10 2c3.9 0 7 3.1 7 7 0 5.2-7 13-7 13S3 14.2 3 9c0-3.9 3.1-7 7-7z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-        </a>
-        <a href="https://www.tiktok.com/@dairecktech?lang=es-419" target="_blank" aria-label="TikTok">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
-                <path d="M8.5 8.5v.01"></path>
-            </svg>
-        </a>
-        <a href="https://www.linkedin.com/in/dairecktech/" target="_blank" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-        </a>
-    </div>
-    <p>&copy; <script>document.write(new Date().getFullYear())</script> DAIRECKTECH. Todos los derechos reservados.</p>
-</footer>
+    <footer class="fade-in">
+        <div class="logo">DAIRECKTECH</div>
+        <p>Corte Láser CNC de Precisión Industrial</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/dairecktechmx/" target="_blank" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61570096811176" target="_blank" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                </svg>
+            </a>
+            <a href="https://wa.me/528132391715" target="_blank" aria-label="WhatsApp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 2c3.9 0 7 3.1 7 7 0 5.2-7 13-7 13S3 14.2 3 9c0-3.9 3.1-7 7-7z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+            </a>
+            <a href="https://www.tiktok.com/@dairecktech?lang=es-419" target="_blank" aria-label="TikTok">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+                    <path d="M8.5 8.5v.01"></path>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/dairecktech/" target="_blank" aria-label="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+            </a>
+        </div>
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> DAIRECKTECH. Todos los derechos reservados.</p>
+    </footer>
+
     <script>
         // Cursor personalizado
         const cursor = document.querySelector('.custom-cursor');
@@ -689,8 +1010,244 @@
                 });
             });
         });
-        
+    </script>
 
+    <script>
+        // Carrusel automático de trabajos
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('auto-carousel');
+            const indicatorsContainer = document.getElementById('auto-carousel-indicators');
+            
+            // Imágenes para el carrusel (reemplaza con tus propias imágenes)
+            const images = [
+                'img1.jpg', 'img2.jpg', 'img3.jpg',
+                'img4.jpg', 'img5.jpg', 'img6.jpg'
+            ];
+            
+            // Crear slides e indicadores
+            images.forEach((img, index) => {
+                // Crear slide
+                const slide = document.createElement('div');
+                slide.className = 'auto-carousel-slide';
+                slide.dataset.index = index;
+                
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = `Proyecto ${index + 1}`;
+                imgElement.loading = "lazy";
+                
+                slide.appendChild(imgElement);
+                carousel.appendChild(slide);
+                
+                // Crear indicador
+                const indicator = document.createElement('div');
+                indicator.className = 'auto-carousel-indicator';
+                if (index === 0) indicator.classList.add('active');
+                indicator.dataset.index = index;
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+            
+            const slides = document.querySelectorAll('.auto-carousel-slide');
+            const indicators = document.querySelectorAll('.auto-carousel-indicator');
+            let currentIndex = 0;
+            let intervalId;
+            
+            // Función para mostrar un slide específico
+            function goToSlide(index) {
+                currentIndex = index;
+                updateCarousel();
+                resetInterval();
+            }
+            
+            // Función para actualizar el carrusel
+            function updateCarousel() {
+                slides.forEach((slide, i) => {
+                    slide.style.opacity = i === currentIndex ? '1' : '0';
+                    slide.style.zIndex = i === currentIndex ? '1' : '0';
+                });
+                
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                });
+            }
+            
+            // Función para avanzar al siguiente slide
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateCarousel();
+            }
+            
+            // Función para reiniciar el intervalo
+            function resetInterval() {
+                clearInterval(intervalId);
+                startInterval();
+            }
+            
+            // Función para iniciar el intervalo
+            function startInterval() {
+                intervalId = setInterval(nextSlide, 3000); // Cambia cada 3 segundos
+            }
+            
+            // Iniciar el carrusel
+            updateCarousel();
+            startInterval();
+            
+            // Pausar al pasar el mouse
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(intervalId);
+            });
+            
+            // Reanudar al quitar el mouse
+            carousel.addEventListener('mouseleave', () => {
+                startInterval();
+            });
+        });
+    </script>
+
+    <script>
+        // Coverflow de clientes
+        document.addEventListener('DOMContentLoaded', function() {
+            const coverflow = document.getElementById('coverflow-slider');
+            
+            // Logos de clientes (reemplaza con tus propias imágenes)
+            const clients = [
+                'aam.svg', 'selecta.png', 'roshfrans.png',
+                'hubbell.svg', 'uanl.png', 'sikara.png',
+                'kloeckner.png', 'nmm.png', 'sunmall.png',
+                'fluidmaster.svg', 'salud-nl.png', 'dsv.png',
+                'galerias.png', 'amaranzero.svg', 'wgym.png',
+                'schneider.png', 'coppel.png', 'dinamica.png'
+            ];
+            
+            // Crear elementos de cliente
+            clients.forEach((client, index) => {
+                const item = document.createElement('div');
+                item.className = 'coverflow-item';
+                item.dataset.index = index;
+                
+                const img = document.createElement('img');
+                img.src = client;
+                img.alt = `Cliente ${index + 1}`;
+                
+                item.appendChild(img);
+                coverflow.appendChild(item);
+            });
+            
+            const items = document.querySelectorAll('.coverflow-item');
+            const totalItems = items.length;
+            let radius = 300;
+            let currentAngle = 0;
+            let targetAngle = 0;
+            let autoRotate = true;
+            let rotationSpeed = 0.5;
+            let animationId;
+            let isDragging = false;
+            let startX, startAngle;
+            
+            // Posicionar los items en el círculo 3D
+            function positionItems(angle = currentAngle) {
+                const angleIncrement = (Math.PI * 2) / totalItems;
+                
+                items.forEach((item, index) => {
+                    const itemAngle = angle + (index * angleIncrement);
+                    const x = Math.sin(itemAngle) * radius;
+                    const z = (Math.cos(itemAngle) * radius) - radius;
+                    const scale = 0.6 + (0.4 * (1 - Math.abs(z) / radius));
+                    
+                    item.style.transform = `
+                        translateX(${x}px) 
+                        translateZ(${z}px) 
+                        scale(${scale})
+                    `;
+                    
+                    item.style.opacity = 0.5 + (0.5 * (1 - Math.abs(z) / radius));
+                    item.style.zIndex = Math.floor(scale * 100);
+                });
+            }
+            
+            // Animación suave
+            function animate() {
+                currentAngle += (targetAngle - currentAngle) * 0.1;
+                
+                if (autoRotate && !isDragging) {
+                    targetAngle -= rotationSpeed * 0.01;
+                }
+                
+                positionItems(currentAngle);
+                animationId = requestAnimationFrame(animate);
+            }
+            
+            // Navegar a un ítem específico
+            function goToItem(index) {
+                const angleIncrement = (Math.PI * 2) / totalItems;
+                targetAngle = -index * angleIncrement;
+            }
+            
+            // Eventos de ratón
+            coverflow.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                startAngle = currentAngle;
+                autoRotate = false;
+                coverflow.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - startX;
+                targetAngle = startAngle + (deltaX * 0.01);
+            });
+            
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                autoRotate = true;
+                coverflow.style.cursor = 'grab';
+            });
+            
+            // Eventos táctiles para móviles
+            coverflow.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startAngle = currentAngle;
+                autoRotate = false;
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.touches[0].clientX - startX;
+                targetAngle = startAngle + (deltaX * 0.01);
+                e.preventDefault();
+            });
+            
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+                autoRotate = true;
+            });
+            
+            // Navegación por clic en los ítems
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (isDragging) return;
+                    const index = parseInt(item.dataset.index);
+                    goToItem(index);
+                });
+            });
+            
+            // Responsive
+            function handleResize() {
+                radius = Math.min(window.innerWidth * 0.4, 400);
+                positionItems();
+            }
+            
+            window.addEventListener('resize', handleResize);
+            
+            // Inicialización
+            coverflow.style.cursor = 'grab';
+            handleResize();
+            animate();
+        });
     </script>
 </body>
 </html>
