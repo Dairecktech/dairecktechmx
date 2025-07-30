@@ -500,13 +500,15 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            transition: transform 0.3s ease; 
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
         }
         
         .coverflow-item:hover img {
-            transform: scale(1.05); 
+            filter: grayscale(0%);
         }
-                /* Contacto */
+        
+        /* Contacto */
         #contacto {
             background-color: rgba(255, 255, 255, 0.9);
         }
@@ -862,7 +864,7 @@
                     <div>
                         <h3>Dirección</h3>
                         <p>Centro de Guadalupe, 67100 Guadalupe, N.L.</p>
-                         <p>Entregas en sucursal/domicilio con cobertura nacional</p>
+                        <p>Envíos locales y nacionales</p>
                     </div>
                 </div>
                 
@@ -878,7 +880,7 @@
                     <div class="info-icon">✉️</div>
                     <div>
                         <h3>Email</h3>
-                        <p>dairecktech2025@gmail.com</p>
+                        <p>dairecktech@dmconstruccionesmx.com</p>
                     </div>
                 </div>
                 
@@ -888,7 +890,7 @@
             </div> -->
             
             <div class="contact-form fade-in delay-2">
-                <form id="formulario-contacto" action="https://formsubmit.co/dairecktech2025@gmail.com" method="POST">
+                <form id="formulario-contacto" action="https://formsubmit.co/dairecktech@dmconstruccionesmx.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_next" value="https://dairecktech.github.io/dairecktechmx/agradecimiento.html">
                     <input type="hidden" name="_template" value="table">
